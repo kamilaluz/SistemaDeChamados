@@ -1,0 +1,44 @@
+﻿@model Tickets.Models.Chamado
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary btn-sm "><i class="fas fa-chevron-left"></i></a> Editar chamado</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-chamadoId="@(ViewData["ChamadoId"])">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label">Chamado</label>
+                <input asp-for="Titulo" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <textarea asp-for="Descricao" class="form-control" readonly ></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusId" class="control-label">Status</label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-sm" ><i class="fas fa-save"></i> Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

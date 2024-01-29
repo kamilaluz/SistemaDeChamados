@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Tickets.Models.Chamado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Chamados</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Abrir chamado</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Status</th>
+            <th>Funcionário</th>
+            <th>Atendente</th>
+            <th width="120px"></th>
+            <th width="120px"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Funcionario.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Atendente.Nome)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm "><i class="fas fa-search"></i> Detalhes</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm "><i class="fas fa-trash-alt"></i> Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

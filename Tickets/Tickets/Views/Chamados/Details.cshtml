@@ -1,0 +1,74 @@
+﻿@model Tickets.Models.ChamadoComentarios
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><a asp-action="Index" class="btn btn-secondary btn-sm "><i class="fas fa-chevron-left"></i></a> Detalhes </h1>
+
+<div>
+    <h4>Chamado - nº @Html.DisplayFor(model => model.Chamado.Id)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Título</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Titulo)</dd>
+        <dt class="col-sm-2">Descrição</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Descricao)</dd>
+        <dt class="col-sm-2">Data</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Data)</dd>
+        <dt class="col-sm-2">Status</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Status.Nome)</dd>
+        <dt class="col-sm-2">Funcionário</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Funcionario.Nome)</dd>
+        <dt class="col-sm-2">Atendente</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Chamado.Atendente.Nome)</dd>
+    </dl>
+</div>
+<div>
+
+    
+    <a asp-action="Edit" asp-route-id="@Model.Chamado.Id" class="btn btn-warning btn-sm "><i class="fas fa-edit"></i> Editar</a>
+    
+</div>
+<br />
+<br />
+
+<div>
+
+    <hr />
+    <h4>Comentários</h4>
+    <a asp-action="AddComentario" asp-route-chamadoId="@Model.Chamado.Id" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Adicionar</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Autor</th>
+                <th>Data</th>
+                <th width ="100px"></th>
+                <th width ="100px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comentario in Model.ListaComentarios)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => comentario.Titulo)</td>
+                    <td>@Html.DisplayFor(modelItem => comentario.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => comentario.Autor.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => comentario.Data)</td>
+                    <td>
+                        <a asp-action="EditarComentario" asp-route-id="@comentario.Id" class="btn btn-warning btn-sm "><i class="fas fa-edit"></i> Editar </a>
+                    </td>
+                    <td>
+                        <a asp-action="ExcluirComentario" asp-route-id="@comentario.Id" class="btn btn-danger btn-sm "><i class="fas fa-trash-alt"></i> Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
